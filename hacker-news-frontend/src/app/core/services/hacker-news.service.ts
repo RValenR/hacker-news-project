@@ -25,7 +25,7 @@ export class HackerNewsService {
   }
 
   getUsageLogs(): Observable<UsageLog[]> {
-    return this.http.get<UsageLog[]>(`${this.apiUrl}/usage-logs`);
+    return this.http.get<UsageLog[]>(`${this.apiUrl}/entries/usage-logs`);
   }
 
   refreshEntries(): Observable<Entry[]> {

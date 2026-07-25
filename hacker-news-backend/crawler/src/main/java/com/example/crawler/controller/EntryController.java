@@ -2,6 +2,7 @@ package com.example.crawler.controller;
 
 import com.example.crawler.dto.EntryDTO;
 import com.example.crawler.model.Entry;
+import com.example.crawler.model.UsageLog;
 import com.example.crawler.repository.EntryRepository;
 import com.example.crawler.service.HackerNewsScraperService;
 import com.example.crawler.service.UsageLogService;
@@ -142,7 +143,7 @@ public class EntryController {
      * Obtener logs de uso
      */
     @GetMapping("/usage-logs")
-    public ResponseEntity<List<com.example.crawler.model.UsageLog>> getUsageLogs() {
+    public ResponseEntity<List<UsageLog>> getUsageLogs() {
         return ResponseEntity.ok(usageLogService.getLastLogs(20));
     }
 
