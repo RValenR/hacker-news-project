@@ -18,7 +18,7 @@ hacker-news-project/
 ## Requisitos
 - Node.js 18+
 - Java 17+
-- Docker (opcional)
+- Docker
 
 ## Instalación y ejecución
 Ver documentación detallada en cada submódulo.
