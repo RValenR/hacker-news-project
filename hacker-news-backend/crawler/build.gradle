@@ -23,9 +23,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// H2 Console (para acceder a la base de datos en memoria)
-	implementation 'org.springframework.boot:spring-boot-starter-h2-console'
-
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
