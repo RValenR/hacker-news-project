@@ -162,7 +162,7 @@
 
 .stat-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -254,22 +254,22 @@
 }
 
 .btn-filter-active {
-  background: var(--primary-600);
+  background: #4f46e5;
   color: white;
   box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
 }
 
 .btn-filter-active:hover {
-  background: var(--primary-700);
+  background: #4338ca;
 }
 
 .btn-filter-inactive {
-  background: var(--gray-100);
-  color: var(--gray-700);
+  background: #f1f5f9;
+  color: #334155;
 }
 
 .btn-filter-inactive:hover {
-  background: var(--gray-200);
+  background: #e2e8f0;
 }
 
 /* ============================================
