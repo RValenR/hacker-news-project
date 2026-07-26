@@ -6,7 +6,7 @@ Filter B: Titles with 5 or fewer words, ordered by points
 
 The application also records all user interactions for usage analysis.
 
-## ========= FEatures ======
+## ========= Features ======
 
 ## Functional
 ✅ Web Scraping: Automatically extracts the first 30 entries from Hacker News
@@ -61,8 +61,6 @@ The application also records all user interactions for usage analysis.
 |-------|--------|
 | **Entries** | id, position, title, points, comments, wordCount |
 | **UsageLogs** | id, timestamp, filterType, resultCount, responseTimeMs, endpoint |
-
-### Data Flow
 
 
 ## Requirements
