@@ -34,46 +34,35 @@ The application also records all user interactions for usage analysis.
 
 ✅ Responsive Design: Mobile and tablet adaptable UI
 
-## Architecture
+## 🏗️ Architecture
 
-┌─────────────────────────────────────────────────────────────────┐
-│                         Client (Browser)                       │
-│                           http://localhost:4200                 │
-└─────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      Frontend (Angular + Nginx)                 │
-│                      http://localhost:4200                      │
-│  ┌───────────────┐  ┌───────────────┐  ┌─────────────────────┐ │
-│  │   Dashboard   │  │  Filters UI   │  │  Activity Modal     │ │
-│  └───────────────┘  └───────────────┘  └─────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼ (API REST)
-┌─────────────────────────────────────────────────────────────────┐
-│                      Backend (Spring Boot)                      │
-│                      http://localhost:8080                      │
-│  ┌───────────────┐  ┌───────────────┐  ┌─────────────────────┐ │
-│  │  Controller   │  │   Service     │  │   Repository        │ │
-│  │  (REST API)   │──│  (Scraping)   │──│   (JPA/H2)          │ │
-│  └───────────────┘  └───────────────┘  └─────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   Database (H2 - In Memory)                     │
-│                  jdbc:h2:mem:hackernewsdb                      │
-│  ┌─────────────────────┐  ┌─────────────────────────────────┐ │
-│  │  Entries             │  │  UsageLogs                      │ │
-│  │  - id                │  │  - id                          │ │
-│  │  - position          │  │  - timestamp                   │ │
-│  │  - title             │  │  - filterType                  │ │
-│  │  - points            │  │  - resultCount                 │ │
-│  │  - comments          │  │  - responseTimeMs              │ │
-│  │  - wordCount         │  │  - endpoint                    │ │
-│  └─────────────────────┘  └─────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
+### System Layers
+
+#### 1. Client Layer
+- **Browser** (http://localhost:4200)
+- Interacts with the frontend application
+
+#### 2. Frontend Layer (Angular + Nginx)
+| Component | Description |
+|-----------|-------------|
+| **Dashboard** | Statistics and metrics visualization |
+| **Filters UI** | Filter buttons for data analysis |
+| **Activity Modal** | Usage logs display |
+
+#### 3. Backend Layer (Spring Boot)
+| Component | Description |
+|-----------|-------------|
+| **Controller** | REST API endpoints (`/api/*`) |
+| **Service** | Business logic and web scraping |
+| **Repository** | Data access with JPA/Hibernate |
+
+#### 4. Data Layer (H2 Database)
+| Table | Fields |
+|-------|--------|
+| **Entries** | id, position, title, points, comments, wordCount |
+| **UsageLogs** | id, timestamp, filterType, resultCount, responseTimeMs, endpoint |
+
+### Data Flow
 
 
 ## Requirements
