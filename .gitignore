@@ -27,3 +27,9 @@ temp/
 
 # Docker
 *.pid
+.dockerignore
+.env
+
+# Volúmenes de Docker
+volumes/
+data/
