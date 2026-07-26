@@ -104,6 +104,12 @@
         class="btn-filter">
         📝 ≤ 5 words (by points)
       </button>
+      <!-- 🆕 BOTÓN PARA ABRIR MODAL DE ACTIVIDAD -->
+      <button 
+        (click)="openModal()"
+        class="btn-filter btn-modal">
+        📊 Recent Activity
+      </button>
     </div>
 
     <!-- Loading State -->
@@ -163,22 +169,39 @@
       <h3>No entries found</h3>
       <p>Try refreshing or adjusting your filters</p>
     </div>
+  </main>
+</div>
 
-    <!-- Usage Logs -->
-    <div *ngIf="usageLogs.length > 0" class="logs-container">
-      <h3 class="logs-title">Recent Activity</h3>
-      <div class="logs-list">
-        <div *ngFor="let log of usageLogs" class="log-item">
-          <div class="log-left">
-            <span class="log-time">{{ log.timestamp | date:'short' }}</span>
-            <span class="log-filter">{{ log.filterType }}</span>
+<!-- 🆕 MODAL POPUP - RECENT ACTIVITY -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>📊 Recent Activity ({{ usageLogs.length }})</h2>
+      <button class="modal-close" (click)="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- Logs de uso en el modal -->
+      <div *ngIf="usageLogs.length > 0; else noLogs" class="logs-list-modal">
+        <div *ngFor="let log of usageLogs" class="log-item-modal">
+          <div class="log-left-modal">
+            <span class="log-time-modal">{{ log.timestamp | date:'short' }}</span>
+            <span class="log-filter-modal">{{ log.filterType }}</span>
           </div>
-          <div class="log-right">
-            <span class="log-results">{{ log.resultCount }} results</span>
-            <span class="log-time-ms">{{ log.responseTimeMs }}ms</span>
+          <div class="log-right-modal">
+            <span class="log-results-modal">{{ log.resultCount }} results</span>
+            <span class="log-time-ms-modal">{{ log.responseTimeMs }}ms</span>
           </div>
         </div>
       </div>
+      <ng-template #noLogs>
+        <div class="empty-logs">
+          <p>No activity recorded yet.</p>
+          <p class="empty-sub">Apply a filter to start tracking usage.</p>
+        </div>
+      </ng-template>
     </div>
-  </main>
+    <div class="modal-footer">
+      <button class="btn-modal-close" (click)="closeModal()">Close</button>
+    </div>
+  </div>
 </div>

@@ -645,3 +645,315 @@
     justify-content: center;
   }
 }
+
+/* ============================================
+   MODAL POPUP - RECENT ACTIVITY
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+  padding: 1rem;
+}
+
+.modal-container {
+  background: white;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--gray-200);
+  background: linear-gradient(135deg, var(--primary-50) 0%, white 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--gray-500);
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: var(--transition);
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--gray-800);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+  flex: 1;
+  max-height: calc(90vh - 140px);
+}
+
+/* ============================================
+   LOGS DENTRO DEL MODAL
+   ============================================ */
+.logs-list-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.log-item-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-400);
+  transition: var(--transition);
+}
+
+.log-item-modal:hover {
+  background: var(--gray-100);
+  transform: translateX(4px);
+}
+
+.log-left-modal {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.log-time-modal {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+.log-filter-modal {
+  display: inline-flex;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  background: var(--primary-100);
+  color: var(--primary-700);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.log-right-modal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gray-600);
+}
+
+.log-results-modal {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.log-time-ms-modal {
+  color: var(--gray-400);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   ESTADO VACÍO
+   ============================================ */
+.empty-logs {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--gray-500);
+}
+
+.empty-logs p {
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.empty-logs .empty-sub {
+  font-size: 0.875rem;
+  color: var(--gray-400);
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   FOOTER DEL MODAL
+   ============================================ */
+.modal-footer {
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: flex-end;
+  background: var(--gray-50);
+  border-radius: 0 0 16px 16px;
+}
+
+.btn-modal-close {
+  background: var(--primary-600);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-modal-close:hover {
+  background: var(--primary-700);
+  transform: scale(1.02);
+}
+
+/* ============================================
+   BOTÓN DEL FILTRO PARA EL MODAL
+   ============================================ */
+.btn-modal {
+  background: var(--primary-100);
+  color: var(--primary-700);
+  border: 1px solid var(--primary-200);
+}
+
+.btn-modal:hover {
+  background: var(--primary-200);
+  transform: scale(1.02);
+}
+
+/* ============================================
+   SCROLL DEL MODAL
+   ============================================ */
+.modal-body::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+/* ============================================
+   RESPONSIVE DEL MODAL
+   ============================================ */
+@media (max-width: 768px) {
+  .modal-container {
+    max-width: 100%;
+    max-height: 95vh;
+    margin: 0.5rem;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    padding: 1rem 1.25rem;
+  }
+
+  .modal-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .modal-body {
+    padding: 1rem 1.25rem;
+    max-height: calc(95vh - 120px);
+  }
+
+  .modal-footer {
+    padding: 0.75rem 1.25rem;
+  }
+
+  .log-item-modal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .log-right-modal {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .log-left-modal {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0.25rem;
+  }
+
+  .modal-container {
+    max-height: 98vh;
+    border-radius: 8px;
+  }
+
+  .modal-body {
+    padding: 0.75rem 1rem;
+  }
+
+  .log-item-modal {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .log-time-modal {
+    font-size: 0.75rem;
+  }
+}

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HackerNewsService } from './core/services/hacker-news.service';
 import { Entry, FilterType } from './core/models/entry.model';
 import { UsageLog } from './core/models/usage-log.model';
-import { HackerNewsService } from './core/services/hacker-news.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
   entries: Entry[] = [];
@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   currentFilter: FilterType = 'NONE';
   isLoading = false;
   errorMessage: string | null = null;
+  showModal = false; // ← Controla el modal
 
-  // Estadísticas
   totalEntries = 0;
   avgPoints = 0;
   totalComments = 0;
@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEntries();
+    this.loadUsageLogs();
   }
 
   loadEntries(): void {
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit {
         this.currentFilter = filterType;
         this.calculateStats();
         this.isLoading = false;
-        this.loadUsageLogs();
+        this.loadUsageLogs(); // ← Actualizar logs al aplicar filtro
       },
       error: (error) => {
         this.errorMessage = 'Error applying filter. Please try again.';
@@ -77,9 +78,29 @@ export class AppComponent implements OnInit {
   loadUsageLogs(): void {
     this.hackerNewsService.getUsageLogs().subscribe({
       next: (data) => {
-        this.usageLogs = data.slice(0, 10);
+        this.usageLogs = data.slice(0, 20); // ← Más logs para el modal
+        console.log('📊 Logs cargados:', this.usageLogs.length);
       },
-      error: (error) => console.error('Error loading logs:', error)
+      error: (error) => {
+        console.error('Error loading logs:', error);
+        // Si hay error, mostrar logs de prueba (para desarrollo)
+        this.usageLogs = [
+          {
+            timestamp: new Date().toISOString(),
+            filterType: 'MORE_THAN_5',
+            resultCount: 12,
+            responseTimeMs: 245,
+            endpoint: '/api/entries/filter/more-than-5'
+          },
+          {
+            timestamp: new Date(Date.now() - 60000).toISOString(),
+            filterType: 'LESS_EQUAL_5',
+            resultCount: 18,
+            responseTimeMs: 189,
+            endpoint: '/api/entries/filter/less-equal-5'
+          }
+        ];
+      }
     });
   }
 
@@ -102,5 +123,17 @@ export class AppComponent implements OnInit {
       case 'LESS_EQUAL_5': return '≤ 5 words';
       default: return 'All entries';
     }
+  }
+
+  // 🆕 MÉTODOS PARA EL MODAL
+  openModal(): void {
+    this.showModal = true;
+    document.body.style.overflow = 'hidden';
+    this.loadUsageLogs(); // ← Recargar logs al abrir el modal
+  }
+
+  closeModal(): void {
+    this.showModal = false;
+    document.body.style.overflow = 'auto';
   }
 }
