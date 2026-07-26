@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./hacker-news-backend
+      dockerfile: Dockerfile
+    container_name: hacker-news-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:hackernewsdb
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_H2_CONSOLE_ENABLED=true
+      - SPRING_H2_CONSOLE_PATH=/h2-console
+      - SPRING_JPA_SHOW_SQL=true
+    networks:
+      - hacker-news-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./hacker-news-frontend
+      dockerfile: Dockerfile
+    container_name: hacker-news-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - hacker-news-network
+    restart: unless-stopped
+
+networks:
+  hacker-news-network:
+    driver: bridge
