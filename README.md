@@ -123,13 +123,17 @@ ng test
 cd hacker-news-backend/crawler
 ./gradlew test
 
+
 ## Test Coverage
-Component	        Coverage	    Status
-REST Controllers	100%	        ✅
-Services (Logs)	    100%	        ✅
-JPA Repositories	90%	            ✅
-Models	            100%	        ✅
-Scraping Service	Manual	        ⚠️*
+
+### Unit Tests
+| Component | Coverage | Status |
+|-----------|----------|--------|
+| REST Controllers | 100% | ✅ |
+| Services (Logs) | 100% | ✅ |
+| JPA Repositories | 90% | ✅ |
+| Models | 100% | ✅ |
+| Scraping Service | Manual | ⚠️ |
 
 ⚠️ *The scraping service depends on an external resource (Hacker News), so it is manually validated.
 
