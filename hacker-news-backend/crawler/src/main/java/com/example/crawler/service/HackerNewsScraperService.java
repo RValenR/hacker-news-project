@@ -23,12 +23,14 @@ public class HackerNewsScraperService {
 
     /**
      * Extrae las primeras 30 entradas de Hacker News
+     * Get the first 30 inputs of hacker news
      */
     public List<Entry> scrapeTopEntries() {
         List<Entry> entries = new ArrayList<>();
 
         try {
             logger.info("Iniciando scraping de Hacker News...");
+            logger.info("Start scraping...");
             Document doc = Jsoup.connect(HACKER_NEWS_URL)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
                     .timeout(10000)
@@ -39,18 +41,21 @@ public class HackerNewsScraperService {
             int count = 0;
 
             for (Element row : rows) {
-                if (count >= 30) break;
+                if (count >= 30) break; // Justo the first 30
 
                 try {
                     // Extraer posición
+                    // Get position
                     Element rankElement = row.selectFirst(".rank");
                     int position = Integer.parseInt(rankElement.text().replace(".", ""));
 
                     // Extraer título
+                    // Get title
                     Element titleElement = row.selectFirst(".titleline > a");
                     String title = titleElement != null ? titleElement.text() : "No title";
 
                     // Extraer puntos y comentarios (están en la siguiente fila)
+                    // get points and comment
                     Element subtext = row.nextElementSibling();
                     if (subtext != null) {
                         Elements scoreElements = subtext.select(".score");
@@ -65,6 +70,7 @@ public class HackerNewsScraperService {
                         }
 
                         // Contar palabras del título (excluyendo símbolos)
+                        // Count words method
                         int wordCount = countWords(title);
 
                         Entry entry = new Entry(position, title, points, comments, wordCount);
@@ -91,6 +97,7 @@ public class HackerNewsScraperService {
 
     /**
      * Cuenta las palabras en un título, excluyendo símbolos
+     * Count words in the title
      */
     private int countWords(String title) {
         if (title == null || title.isEmpty()) {
@@ -98,8 +105,10 @@ public class HackerNewsScraperService {
         }
 
         // Eliminar símbolos pero mantener letras, números y espacios
+        // deletes simbols
         String cleaned = SYMBOL_PATTERN.matcher(title).replaceAll(" ");
         // Dividir por espacios y filtrar palabras vacías
+        // filter empty words
         String[] words = cleaned.trim().split("\\s+");
         return words.length;
     }

@@ -48,6 +48,7 @@ public class EntryController {
                 .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
+        // Save log in NONE filter
         usageLogService.saveLog("ALL", dtos.size(), endTime - startTime, "/api/entries");
 
         return ResponseEntity.ok(dtos);
@@ -72,6 +73,7 @@ public class EntryController {
                 .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
+        // Save log in REFRESH
         usageLogService.saveLog("REFRESH", dtos.size(), endTime - startTime, "/api/entries/refresh");
 
         return ResponseEntity.ok(dtos);
@@ -103,6 +105,7 @@ public class EntryController {
                 .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
+        // Save log in MORE_THAN_5 filter
         usageLogService.saveLog("MORE_THAN_5", dtos.size(), endTime - startTime, "/api/entries/filter/more-than-5");
 
         return ResponseEntity.ok(dtos);
@@ -134,6 +137,7 @@ public class EntryController {
                 .collect(Collectors.toList());
 
         long endTime = System.currentTimeMillis();
+        // Save log in LESS_EQUAL_5 filter
         usageLogService.saveLog("LESS_EQUAL_5", dtos.size(), endTime - startTime, "/api/entries/filter/less-equal-5");
 
         return ResponseEntity.ok(dtos);
